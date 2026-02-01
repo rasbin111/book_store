@@ -42,7 +42,10 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'apps.useraccount',
+    'apps.core',
+    'apps.author',
     'apps.book',
+    
 ]
 
 MIDDLEWARE = [

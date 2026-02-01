@@ -1,3 +1,64 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.contrib.auth import get_user_model 
+from django.db.models.manager import BaseManager
 
-# Create your models here.
+User = get_user_model()
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+
+class Book(models.Model):
+    title = models.CharField(max_length=250)
+    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=True)
+    author = models.ForeignKey("author.Author", on_delete=models.DO_NOTHING)
+    price = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
+    review_stars = models.PositiveSmallIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
+    upload_date = models.DateTimeField(auto_now_add=True)
+    languages = models.ManyToManyField("core.Language", related_name="books")
+    added_by = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return self.title
+
+
+class BookPurchaseLinks(models.Model):
+    link = models.CharField(max_length=500)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="pur_links")
+
+    def __str__(self):
+        return self.link[0:10]
+
+class BookReviewManager(BaseManager):
+    def get_queryset(self):
+        return super().get_queryset()
+    
+    def with_replies(self):
+        return super().get_queryset().prefetch_related("reviews")
+    
+    def popular(self):
+        self.get_queryset().order_by("-likes")
+
+class BookReview(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="reviews")
+    parent = models.ForeignKey("self", null=True, blank=True, on_delete=models.CASCADE, related_name="replies")
+    comment = models.TextField(null=True, blank=True)
+    reviewer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="book_reviews")
+    stars = models.PositiveSmallIntegerField(default=1, validators=[MinValueValidator(0), MaxValueValidator(5)])
+    likes = models.PositiveIntegerField(default=0)
+    dis_likes = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    objects = BookReviewManager()
+
+    def __str__(self):
+        return f"{self.reviewer.username}'s review on {self.book.title}"
+
+
+
