@@ -37,11 +37,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'graphene_django',
+    'corsheaders',
+
+    'apps.useraccount',
+    'apps.book',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -115,3 +122,23 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+
+AUTH_USER_MODEL = "useraccount.CustomUser"
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+
+GRAPHENE = {
+    "SCHEMA": "book_store.schema.schema",
+    "MIDDLEWARE": [
+        "graphql_jwt.middleware.JSONWebTokenMiddleware",
+    ]
+}
+
+AUTHENTICATION_BACKENDS = [
+    "graphql_jwt.backends.JSONWebTokenBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
+
