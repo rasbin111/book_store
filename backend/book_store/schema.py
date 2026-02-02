@@ -1,9 +1,10 @@
 import graphene
 
 from apps.useraccount.schema import UserAccountQuery, UserAccountMutation
+from apps.author.schema import AuthorQuery
 
 
-class Query(UserAccountQuery, graphene.ObjectType):
+class Query(AuthorQuery, UserAccountQuery, graphene.ObjectType):
     pass
 
 class Mutation(UserAccountMutation, graphene.ObjectType):
