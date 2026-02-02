@@ -14,7 +14,6 @@ class AuthorQuery(ObjectType):
     all_authors = List(AuthorType)
 
     @staticmethod
-    @login_required
     @permission_required("author.view_author")
     def resolve_all_authors(root, info):
         authors = Author.objects.all()

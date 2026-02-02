@@ -1,0 +1,31 @@
+services:
+  # postgres_db:
+  #   image: postgres:17.4-alipine3.21
+  #   container_name: postgres_db
+  #   restart: always
+  #   ports: 
+  #     - "5432:5432"
+  #   environment:
+  #     POSTGRES_DB: ${DB_NAME}
+  #     POSTGRES_USER: ${DB_USER}
+  #     POSTGRES_PASSWORD: ${DB_PASSWORD}
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+    
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend:/backend
+    ports:
+      - "8000:8000"
+    # depends_on:
+    #   - postgres_db
+  
+#   frontend:
+#     build: ./frontend
+#     volumes:
+#       - ./frontend:/frontend
+#     ports:
+#       - "3000:3000"
+# volumes:
+#   postgres_data:
