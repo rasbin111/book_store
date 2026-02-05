@@ -4,6 +4,7 @@ decorator==5.2.1
 Django==6.0.1
 django-cors-headers==4.9.0
 django-graphql-jwt==0.4.0
+dnspython==2.8.0
 executing==2.2.1
 graphene==3.4.3
 graphene-django==3.2.3
@@ -21,6 +22,7 @@ ptyprocess==0.7.0
 pure_eval==0.2.3
 Pygments==2.19.2
 PyJWT==2.11.0
+pymongo==4.16.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.2.1
 six==1.17.0
