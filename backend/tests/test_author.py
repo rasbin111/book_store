@@ -13,3 +13,4 @@ class TestModelCreation(TestCase):
     def test_author_data(self):
         author = Author.objects.last()
         self.assertEqual(author.author_id, "auth1")
+        
