@@ -20,6 +20,7 @@ class UserManager(BaseUserManager):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
         extra_fields.setdefault("is_active", True)
+        extra_fields.setdefault("role", "superuser")
 
         if extra_fields.get("is_staff") is not True:
             raise ValueError("Superuser must have is_staff = True")
@@ -30,9 +31,16 @@ class UserManager(BaseUserManager):
 
 
 class CustomUser(AbstractUser):
+    USER_ROLES_CHOICES = (
+        ('superuser', 'superuser'),
+        ('admin', 'admin'),
+        ('editor', 'editor'),
+        ('viewer', 'viewer')
+    )
     username = models.CharField(max_length=100, unique=True)
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100, unique=True)
+    role = models.CharField(max_length=10, default="viewer", choices=USER_ROLES_CHOICES)
     date_joined = models.DateTimeField(auto_now_add=True, null=True)
     phone_number = models.CharField(max_length=15, null=True, blank=True, validators=[PHONE_REGEX, ])
     is_admin = models.BooleanField(default=False)

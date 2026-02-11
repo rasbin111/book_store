@@ -1,4 +1,6 @@
 import graphene
+from graphql import GraphQLError
+
 from graphene_django import DjangoObjectType
 import graphql_jwt
 from django.contrib.auth import get_user_model
@@ -20,9 +22,16 @@ class UserAccountQuery(graphene.ObjectType):
         users = User.objects.all()
         return users
 
+class ObtainJSONWebToken(graphql_jwt.JSONWebTokenMutation):
+    user = graphene.Field(UserType)
+
+    @classmethod
+    def resolve(cls, root, info, **kwargs):
+        return cls(user=info.context.user)
+        
 
 class AuthenticationMutation(graphene.ObjectType):
-    token_auth = graphql_jwt.ObtainJSONWebToken.Field()
+    token_auth = ObtainJSONWebToken.Field()
     verify_token = graphql_jwt.Verify.Field()
     refresh_token = graphql_jwt.Verify.Field()
 
