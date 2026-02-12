@@ -3,11 +3,13 @@ asttokens==3.0.1
 decorator==5.2.1
 Django==6.0.1
 django-cors-headers==4.9.0
+django-filter==25.2
 django-graphql-jwt==0.4.0
 dnspython==2.8.0
 executing==2.2.1
 graphene==3.4.3
 graphene-django==3.2.3
+graphene-django-pagination @ https://github.com/instruct-br/graphene-django-pagination/archive/master.zip#sha256=d727fe2df6632823830d92858f5f98ae91e4fb0ecb252188c92a334515b1bcf0
 graphql-core==3.2.7
 graphql-relay==3.2.0
 ipython==9.10.0
@@ -18,6 +20,7 @@ parso==0.8.5
 pexpect==4.9.0
 promise==2.3
 prompt_toolkit==3.0.52
+psycopg==3.3.2
 ptyprocess==0.7.0
 pure_eval==0.2.3
 Pygments==2.19.2

@@ -1,8 +1,9 @@
 from graphene import List, ObjectType
 from graphene_django import DjangoObjectType
-from graphql_jwt.decorators import permission_required, login_required
+from graphql_jwt.decorators import permission_required
 
 from .models import Author
+
 
 class AuthorType(DjangoObjectType):
     class Meta:

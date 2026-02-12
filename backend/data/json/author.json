@@ -1,0 +1,102 @@
+[
+  {
+    "model": "author.author",
+    "pk": 1,
+    "fields": {
+      "author_id": "AUTH-001",
+      "name": "Robert C. Martin",
+      "average_reviews": 5,
+      "followers_count": 125000
+    }
+  },
+  {
+    "model": "author.author",
+    "pk": 2,
+    "fields": {
+      "author_id": "AUTH-002",
+      "name": "Andrew Hunt",
+      "average_reviews": 5,
+      "followers_count": 98000
+    }
+  },
+  {
+    "model": "author.author",
+    "pk": 3,
+    "fields": {
+      "author_id": "AUTH-003",
+      "name": "Thomas H. Cormen",
+      "average_reviews": 5,
+      "followers_count": 87000
+    }
+  },
+  {
+    "model": "author.author",
+    "pk": 4,
+    "fields": {
+      "author_id": "AUTH-004",
+      "name": "Erich Gamma",
+      "average_reviews": 4,
+      "followers_count": 76000
+    }
+  },
+  {
+    "model": "author.author",
+    "pk": 5,
+    "fields": {
+      "author_id": "AUTH-005",
+      "name": "Yuval Noah Harari",
+      "average_reviews": 5,
+      "followers_count": 150000
+    }
+  },
+  {
+    "model": "author.author",
+    "pk": 6,
+    "fields": {
+      "author_id": "AUTH-006",
+      "name": "Stephen Hawking",
+      "average_reviews": 5,
+      "followers_count": 200000
+    }
+  },
+  {
+    "model": "author.author",
+    "pk": 7,
+    "fields": {
+      "author_id": "AUTH-007",
+      "name": "Paulo Coelho",
+      "average_reviews": 4,
+      "followers_count": 175000
+    }
+  },
+  {
+    "model": "author.author",
+    "pk": 8,
+    "fields": {
+      "author_id": "AUTH-008",
+      "name": "George Orwell",
+      "average_reviews": 5,
+      "followers_count": 210000
+    }
+  },
+  {
+    "model": "author.author",
+    "pk": 9,
+    "fields": {
+      "author_id": "AUTH-009",
+      "name": "Peter Thiel",
+      "average_reviews": 4,
+      "followers_count": 65000
+    }
+  },
+  {
+    "model": "author.author",
+    "pk": 10,
+    "fields": {
+      "author_id": "AUTH-010",
+      "name": "Napoleon Hill",
+      "average_reviews": 4,
+      "followers_count": 112000
+    }
+  }
+]
