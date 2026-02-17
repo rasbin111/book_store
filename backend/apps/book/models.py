@@ -3,6 +3,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth import get_user_model 
 from django.db.models.manager import BaseManager
 
+from utils.common_models import CommonModel
+
 User = get_user_model()
 
 
@@ -16,7 +18,7 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
 
-class Book(models.Model):
+class Book(CommonModel):
     title = models.CharField(max_length=250)
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=True)
     author = models.ForeignKey("author.Author", on_delete=models.DO_NOTHING)
@@ -47,7 +49,7 @@ class BookReviewManager(BaseManager):
     def popular(self):
         self.get_queryset().order_by("-likes")
 
-class BookReview(models.Model):
+class BookReview(CommonModel):
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="reviews")
     parent = models.ForeignKey("self", null=True, blank=True, on_delete=models.CASCADE, related_name="replies")
     comment = models.TextField(null=True, blank=True)
