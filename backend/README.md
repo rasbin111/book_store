@@ -7,4 +7,10 @@ EMAIL_PORT=587
 EMAIL_HOST_USER=your-email@gmail.com
 EMAIL_HOST_PASSWORD=your-16-char-app-password # not your regular password, remove this comment on .env
 DEFAULT_FROM_EMAIL=book_store@gmail.com
+
+DB_NAME=book_store_db
+DB_USER=dev_user
+DB_PASSWORD=adminadminadmin
+DB_HOST=localhost
+DB_PORT=5432
 ```
