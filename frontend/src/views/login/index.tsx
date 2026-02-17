@@ -2,11 +2,14 @@ import { useMutation } from "@apollo/client/react"
 import { LOGIN } from "../../graphql/auth/userAuth"
 import { useForm } from '@mantine/form';
 import { TextInput, PasswordInput, Button } from '@mantine/core';
-import { useNavigate } from "react-router";
+import { useNavigate, Navigate} from "react-router";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthProvider/AuthContext";
+import useAuth from "../../hooks/useAuth";
+
 const LoginPage = () => {
   const navigate = useNavigate();
+  const {isLoggedIn} = useAuth();
   const form = useForm({
     "mode": "uncontrolled",
     initialValues: {
@@ -38,7 +41,7 @@ const LoginPage = () => {
     }
   })
 
-  const handleLogin = (values: {email: string, password: string}) =>{
+    const handleLogin = (values: {email: string, password: string}) =>{
     login({
       variables: {
         email: values.email,
@@ -46,6 +49,12 @@ const LoginPage = () => {
       }
     })
   }
+
+    if (isLoggedIn){
+      return <Navigate to="/" replace />
+  }
+
+
   if (loading) return <p> Loading... </p>
 
   if (error) return <p> Error: {error.message} </p>
