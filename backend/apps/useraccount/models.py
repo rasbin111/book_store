@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from datetime import timedelta
 
 from utils.validators import PHONE_REGEX
-from utils.user import get_unique_username
+from utils.user import get_unique_username, user_avatar_directory_path
 
 
 class UserManager(BaseUserManager):
@@ -41,7 +41,9 @@ class CustomUser(AbstractUser):
     GENDER_CHOICES = ((0, "Male"), (1, "Female"), (2, "Other"))
 
     username = models.CharField(max_length=100, unique=True)
-    name = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100, null=True, blank=True)
+    middle_name = models.CharField(max_length=100, null=True, blank=True)
+    last_name = models.CharField(max_length=100, null=True, blank=True)
     email = models.EmailField(max_length=100, unique=True)
     role = models.CharField(max_length=10, default="viewer", choices=USER_ROLES_CHOICES)
     date_joined = models.DateTimeField(auto_now_add=True, null=True)
@@ -49,7 +51,10 @@ class CustomUser(AbstractUser):
     phone_number = models.CharField(max_length=15, null=True, blank=True, validators=[PHONE_REGEX, ])
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
+    avatar = models.ImageField(upload_to=user_avatar_directory_path, null=True, blank=True)
+
     is_admin = models.BooleanField(default=False)
+    is_email_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
