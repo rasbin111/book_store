@@ -7,7 +7,7 @@ from apps.book.schema import BookQuery, BookMutation
 class Query(AuthorQuery, BookQuery,  UserAccountQuery, graphene.ObjectType):
     pass
 
-class Mutation(UserAccountMutation, graphene.ObjectType):
+class Mutation(UserAccountMutation, BookMutation, graphene.ObjectType):
     pass
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

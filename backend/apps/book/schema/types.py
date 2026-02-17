@@ -19,7 +19,7 @@ class BookType(DjangoObjectType):
             "id",
             "title",
             "category",
-            "author",
+            "authors",
             "price",
             "review_stars",
             "upload_date",

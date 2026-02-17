@@ -40,7 +40,8 @@ class CreateUser(graphene.Mutation):
 
     class Arguments:
         username = graphene.String()
-        name = graphene.String()
+        first_name = graphene.String()
+        last_name = graphene.String()
         email = graphene.String(required=True)
         password = graphene.String(required=True)
         role = graphene.Argument(UserRoleEnum, required=True)
@@ -50,11 +51,12 @@ class CreateUser(graphene.Mutation):
     error = graphene.String()
 
     @staticmethod
-    def mutate(root, info, email, name, password, username, role):
+    def mutate(root, info, email, first_name, last_name, password, username, role):
         try:
             user = User.objects.create(
                 email=email,
-                name=name,
+                first_name=first_name,
+                last_name=last_name,
                 username=username,
                 role=role.value
             )
