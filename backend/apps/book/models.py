@@ -21,7 +21,7 @@ class Category(models.Model):
 class Book(CommonModel):
     title = models.CharField(max_length=250)
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=True)
-    author = models.ForeignKey("author.Author", on_delete=models.DO_NOTHING)
+    author = models.ManyToManyField("author.Author")
     price = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
     review_stars = models.PositiveSmallIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
     upload_date = models.DateTimeField(auto_now_add=True)
