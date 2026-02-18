@@ -1,0 +1,29 @@
+@use "@styles/variables" as v;
+
+.book-home{
+    margin-bottom: 2rem;
+    h2{
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+
+    .book-list{
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        li{
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            border: 1px solid v.$primaryColor;
+            border-radius: 5px;
+            width: 200px;
+            a{
+                color: v.$primaryColor;
+                text-decoration: none;
+            }
+        }
+    }
+}

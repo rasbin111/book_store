@@ -1,0 +1,22 @@
+@use "@styles/variables" as v;
+
+.category-home{
+    margin-bottom: 2rem;
+    h2{
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+    .category-list{
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        li{
+            list-style: none;
+            a{
+                color: v.$primaryColor;
+                text-decoration: none;
+            }
+        }
+    }
+}
