@@ -1,12 +1,12 @@
 import {useAuth} from "../../hooks/useAuth"
 
 const HomePage = () => {
-    const {isHost} = useAuth();
+    const {isEditor, isAdmin} = useAuth();
   return (
     <div>
         <h1> Home Page </h1>
         <div> User Posts</div>
-        {isHost && <div> Edit options </div>}
+        {(isEditor || isAdmin) && <div> Edit options </div>}
 
     </div>
   )

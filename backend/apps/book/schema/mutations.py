@@ -4,7 +4,7 @@ from .types import BookType
 from apps.book.models import Book, Category
 from apps.author.models import Author
 from apps.core.models import Language
-
+from graphql_jwt.decorators import permission_required
 
 class CreateBookMutation(graphene.Mutation):
 
@@ -22,6 +22,7 @@ class CreateBookMutation(graphene.Mutation):
 
     @staticmethod
     @login_required
+    @permission_required(["book.create_book"])
     def mutate(root, info, **kwargs):
         try:
             user = info.context.user

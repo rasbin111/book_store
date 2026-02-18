@@ -10,25 +10,21 @@ export const useAuth = () => {
   }
 
   const { user }: { user: AuthUser | null } = context;
-  
+  console.log(user);
   if (user) {
     return {
       isLoggedIn: true,
-      isAdmin: user?.userRole === "admin",
-      isHost: user?.userRole === "host",
-      isTenant: user?.userRole === "tenant",
-      canPostRoom: user?.userRole === "host" || user?.userRole === "admin",
-      canBook: !!user,
+      isAdmin: user?.role === "ADMIN",
+      isEditor: user?.role === "EDITOR",
+      isViewer: user?.role === "VIEWER",
     };
   }
 
   return {
     isLoggedIn: false,
     isAdmin: false,
-    isHost: false,
-    isTenant: false,
-    canPostRoom: false,
-    canBook: false,
+    isEditor: false,
+    isViewer: false,
   };
 };
 

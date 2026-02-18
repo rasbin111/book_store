@@ -65,7 +65,7 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = ["username"]
 
     def __str__(self):
-        return self.name
+        return self.email
     
     @property
     def get_gender_value(self):

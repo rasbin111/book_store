@@ -1,0 +1,36 @@
+@use "@styles/variables" as v;
+
+.header-main {
+    height: 70px;
+    padding: 1rem 1rem;
+    .header-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        a {
+            text-decoration: none;
+            .logo {
+                font-weight: bold;
+                color: v.$primaryColor;
+                font-size: 1.2rem;
+                cursor: pointer;
+                line-height: 1.5rem;
+            }
+        }
+
+        .user-icon {
+            background-color: v.$secondaryColor;
+            height: 2rem;
+            width: 2rem;
+            border-radius: 50%;
+            display: flex;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            line-height: 1.5rem;
+        }
+    }
+}

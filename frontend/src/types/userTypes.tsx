@@ -1,10 +1,10 @@
-export type UserRole = "admin" | "host" | "tenant";
+export type UserRole = "ADMIN" | "EDITOR" | "VIEWER";
 
 export interface AuthUser {
     id: number;
     username: string;
     email: string;
-    userRole: UserRole;
+    role: UserRole;
     isActive: boolean;
     isVerfied: boolean;
 }

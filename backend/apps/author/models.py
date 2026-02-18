@@ -4,7 +4,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Author(models.Model):
     author_id = models.CharField(max_length=100, unique=True)
-    name = models.CharField()
+    name = models.CharField(max_length=200)
     average_reviews = models.PositiveIntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)], default=0)
     followers_count = models.PositiveIntegerField(default=0)
 
