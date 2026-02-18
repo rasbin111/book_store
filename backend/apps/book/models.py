@@ -5,6 +5,8 @@ from django.db.models.manager import BaseManager
 
 from apps.core.models import CommonModel
 
+from utils.book import book_image_directory_path
+
 User = get_user_model()
 
 
@@ -17,7 +19,7 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = "Categories"
 
-
+    
 class Book(CommonModel):
     title = models.CharField(max_length=250)
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=True)
@@ -30,6 +32,12 @@ class Book(CommonModel):
 
     def __str__(self):
         return self.title
+
+
+class BookImage(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    is_primary = models.BooleanField(default=False)
+    image = models.ImageField(upload_to=book_image_directory_path)
 
 
 class BookPurchaseLinks(models.Model):
