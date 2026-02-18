@@ -3,12 +3,14 @@
 .category-home{
     margin-bottom: 2rem;
     h2{
+        text-align: center;
         font-size: 1.2rem;
         font-weight: bold;
         margin-bottom: 1rem;
     }
     .category-list{
         display: flex;
+        // justify-content: flex-start;
         gap: 1rem;
         flex-wrap: wrap;
         li{

@@ -1,16 +1,19 @@
 import { gql } from "@apollo/client";
 
 export const BOOKS = gql`
-    query bookList{
-        books{
+    query bookList {
+        books {
             id
             title
             price
-            authors{
+            authors {
                 id
                 name
             }
-            language{
+            primaryImage {
+                imageFile
+            }
+            language {
                 name
             }
         }

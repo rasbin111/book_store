@@ -1,7 +1,7 @@
 import graphene
 
 from .types import BookType, CategoryType
-from apps.book.models import Book, Category
+from apps.book.models import Book, Category, BookImage
 
 
 class BookQuery(graphene.ObjectType):

@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, transaction
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth import get_user_model 
 from django.db.models.manager import BaseManager
@@ -29,16 +29,27 @@ class Book(CommonModel):
     upload_date = models.DateTimeField(auto_now_add=True)
     language = models.ForeignKey("core.Language", on_delete=models.SET_NULL, null=True)
     added_by = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    stock_quantity = models.PositiveIntegerField(default=0, null=True)
 
     def __str__(self):
         return self.title
 
 
 class BookImage(models.Model):
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="images")
     is_primary = models.BooleanField(default=False)
-    image = models.ImageField(upload_to=book_image_directory_path)
+    image_file = models.ImageField(upload_to=book_image_directory_path)
 
+    def __str__(self):
+        return str(self.book.title) + "'s image"
+    
+    def save(self, *args, **kwargs):
+        if self.is_primary:
+            with transaction.atomic():
+                BookImage.objects.filter(book=self.book, is_primary=True).update(is_primary=False)
+                super().save(*args, **kwargs)
+        else:
+            super().save(*args, **kwargs)
 
 class BookPurchaseLinks(models.Model):
     link = models.CharField(max_length=500)

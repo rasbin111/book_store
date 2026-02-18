@@ -1,7 +1,23 @@
+import { type AuthorType } from "./authorTypes";
+import { type Language } from "./languageType";
+import { type AuthUser } from "./userTypes";
+
+interface BookImage{
+    id: number;
+    isPrimary: boolean;
+    imageFile: string;
+}
+
 export interface Book{
     id: number;
     title: string;
     price: number;
+    review_stars: number;
+    images: BookImage[];
+    primaryImage: BookImage | null;
+    authors: AuthorType[];
+    language: Language;
+    addedBy: AuthUser;
 }
 
 export interface BooksData{
