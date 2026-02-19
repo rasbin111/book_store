@@ -11,10 +11,23 @@ class CategoryType(DjangoObjectType):
         model = Category
         fields = ["id", "name"]
 
+
+class BookConnection(graphene.relay.Connection):
+    total_count = graphene.Int()
+
+    class Meta:
+        abstract = True
+    
+    @staticmethod
+    def resolve_total_count(root, info):
+        return root.length
+    
 class BookType(DjangoObjectType):
 
     class Meta:
         model = Book
+        interfaces = (graphene.relay.Node,)
+        connection_class = BookConnection
         fields = [
             "id",
             "title",
@@ -28,6 +41,10 @@ class BookType(DjangoObjectType):
             "primary_image",
             "added_by"
         ]
+        # filter_fields = {
+        #     "title": ['icontains'],
+        #     "price": []
+        # }
 
     images = graphene.List(lambda: BookImageType)
     primary_image = graphene.Field(lambda: BookImageType)
@@ -40,7 +57,9 @@ class BookType(DjangoObjectType):
     @staticmethod
     def resolve_primary_image(root, info):
         return root.images.filter(is_primary=True).first()
-    
+
+
+
 class BookImageType(DjangoObjectType):
    
     class Meta:

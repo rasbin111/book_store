@@ -8,8 +8,10 @@ const HomePage = () => {
 
   return (
     <div className="home-main">
-      <CategoryHome />
-      <BooksHome />
+      <div className="main-content">
+        <CategoryHome />
+        <BooksHome />
+      </div>
       {(isEditor || isAdmin) && <div> Edit options </div>}
     </div>
   );

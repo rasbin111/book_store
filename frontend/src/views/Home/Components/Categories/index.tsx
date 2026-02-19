@@ -12,7 +12,7 @@ const CategoryHome = () => {
   if (error) console.log(error);
   return (
     <div className="category-home">
-      <h2> Category </h2>
+      <h2> Categories </h2>
       <ul className="category-list">
         {data &&
           data.categories.length > 0 &&

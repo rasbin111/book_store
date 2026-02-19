@@ -20,6 +20,15 @@ export interface Book{
     addedBy: AuthUser;
 }
 
+interface BookNode{
+    node: Book;
+}
+
+interface BookEdges{
+    edges: BookNode[];
+    totalCount: number;
+}
+
 export interface BooksData{
-    books: Book[];
+    books: BookEdges;
 }
