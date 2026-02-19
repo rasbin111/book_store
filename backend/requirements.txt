@@ -9,7 +9,6 @@ dnspython==2.8.0
 executing==2.2.1
 graphene==3.4.3
 graphene-django==3.2.3
-graphene-django-pagination @ https://github.com/instruct-br/graphene-django-pagination/archive/master.zip#sha256=d727fe2df6632823830d92858f5f98ae91e4fb0ecb252188c92a334515b1bcf0
 graphql-core==3.2.7
 graphql-relay==3.2.0
 ipython==9.10.0
