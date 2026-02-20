@@ -18,6 +18,7 @@ const CustomPagination = ({
       color="#7c2d38"
       onChange={(value) => setPage(value)}
       className="pagination-item"
+      style={{display: "flex", alignItems: "center", justifyContent: "center"}}
       mt={48}
     />
   );

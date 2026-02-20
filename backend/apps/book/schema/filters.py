@@ -16,5 +16,7 @@ class BookFilter(django_filters.FilterSet):
 
     order_by = django_filters.OrderingFilter(fields=(
         "created_at",
-        "updated_at"
+        "updated_at",
+        "price",
+        "title"
     ))

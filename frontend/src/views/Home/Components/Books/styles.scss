@@ -1,8 +1,12 @@
 @use "@styles/variables" as v;
 
 .book-home {
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
     .book-home-nav {
+        margin-bottom: 1rem;
         padding: 0 1rem 0 0;
         display: flex;
         align-items: center;
@@ -10,12 +14,17 @@
         h2 {
             font-size: 1.2rem;
             font-weight: bold;
-            margin-bottom: 1rem;
+            color: v.$blackColor;
         }
 
         .book-home-nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding-right: 2rem;
             .filter-icon {
                 cursor: pointer;
+                color: #CED4DA;
 
                 &:hover {
                     opacity: 0.7;
@@ -27,7 +36,7 @@
     .book-home-body {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        // align-items: center;
         justify-content: center;
     }
 
@@ -55,6 +64,10 @@
                 border-top: 1px solid v.$primaryColor;
                 padding-top: 1rem;
                 padding: 1rem;
+
+                .book-price{
+                    font-size: 1rem;
+                }
                 ul {
                     li {
                         font-size: 0.9rem;

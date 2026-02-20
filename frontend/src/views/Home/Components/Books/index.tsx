@@ -3,26 +3,27 @@ import { type BooksData } from "../../../../types/bookTypes";
 import { BOOKS } from "../../../../graphql/book/queries";
 import CustomLoadinOverlay from "../../../../components/CustomLoadingOverlay";
 import { IoMdOptions } from "react-icons/io";
-
 import "./styles.scss";
 import { useState } from "react";
 import CustomPagination from "../../../../components/Pagination";
 import { useDisclosure } from "@mantine/hooks";
-import { Drawer, ScrollArea } from "@mantine/core";
+import { Drawer, ScrollArea, Select } from "@mantine/core";
 import FilterBooks from "./filterBooks";
 
 const MEDIA_URL = "http://localhost:8000/media/";
 
-const BooksHome = () => {
+const BooksHome = ({category}: {category: string}) => {
   const [opened, { open, close }] = useDisclosure(false);
-
+  const [sortValue, setSortValue] = useState("");
   const [pageSize, setPageSize] = useState(10);
   const [page, setPage] = useState(1);
 
-  const { loading, error, data } = useQuery<BooksData>(BOOKS, {
+  const { loading, error, data, } = useQuery<BooksData>(BOOKS, {
     variables: {
       offset: (page - 1) * pageSize,
       first: pageSize,
+      categorySlug: category,
+      orderBy: sortValue
     },
   });
 
@@ -36,6 +37,20 @@ const BooksHome = () => {
           <h2> Books </h2>
         </div>
         <div className="book-home-nav-right">
+          <Select placeholder="Sort"
+           value={sortValue}
+           onChange={(value)=>{
+            setSortValue(value ?? "title")
+           }}
+           data={[
+            {value: "title", label: "A - Z"},
+            {value: "-title", label: "Z - A"},
+            {value: "-price", label: "Price (High to Low) "},
+            {value: "price", label: "Price (Low to High) "},
+            {value: "-createdAt", label: "Newest"},
+            {value: "createdAt", label: "Oldest"},
+           ]}
+           />
           <IoMdOptions size="24" className="filter-icon" onClick={open} />
           <Drawer
             opened={opened}
@@ -76,7 +91,7 @@ const BooksHome = () => {
                   </div>
                   <div className="book-info">
                     <a href="">{book.title}</a>
-                    <p> {book.price} </p>
+                    <p className="book-price"> NRs. {book.price} </p>
                     <ul>
                       {book.authors.length > 1 ? `Authors` : `Author:`}
                       {book.authors.length > 0 ? (
