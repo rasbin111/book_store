@@ -9,7 +9,7 @@ class CategoryType(DjangoObjectType):
 
     class Meta:
         model = Category
-        fields = ["id", "name"]
+        fields = ["id", "name", "slug"]
 
 
 class BookConnection(graphene.relay.Connection):
