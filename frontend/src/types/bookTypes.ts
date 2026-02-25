@@ -18,6 +18,10 @@ export interface Book{
     authors: AuthorType[];
     language: Language;
     addedBy: AuthUser;
+    numOfRatings: number;
+    averageRating: number;
+    numOfPages: number;
+    description: string;
 }
 
 interface BookNode{

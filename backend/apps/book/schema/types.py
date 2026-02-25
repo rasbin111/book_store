@@ -38,6 +38,10 @@ class BookType(DjangoObjectType):
             "upload_date",
             "language",
             "images",
+            "num_of_pages",
+            "average_rating",
+            "description",
+            "num_of_ratings",
             "primary_image",
             "added_by"
         ]

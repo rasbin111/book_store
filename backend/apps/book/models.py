@@ -1,11 +1,14 @@
 from django.db import models, transaction
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth import get_user_model 
-from django.db.models.manager import BaseManager
+from django.db.models.manager import Manager
 from django.utils.text import slugify
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
 
 from apps.core.models import CommonModel
 from utils.book import book_image_directory_path
+from .signals import increase_book_review, decrease_book_review
 
 User = get_user_model()
 
@@ -29,11 +32,14 @@ class Book(CommonModel):
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=True, related_name="books")
     authors = models.ManyToManyField("author.Author")
     price = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
-    review_stars = models.PositiveSmallIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
+    average_rating = models.DecimalField(max_digits=3, decimal_places=2, default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
     upload_date = models.DateTimeField(auto_now_add=True)
     language = models.ForeignKey("core.Language", on_delete=models.SET_NULL, null=True)
     added_by = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     stock_quantity = models.PositiveIntegerField(default=0, null=True)
+    num_of_pages = models.PositiveSmallIntegerField(default=100, null=True)
+    description = models.TextField(null=True, blank=True)
+    num_of_ratings = models.PositiveSmallIntegerField(default=0, null=True)
 
     def __str__(self):
         return self.title
@@ -62,7 +68,7 @@ class BookPurchaseLinks(models.Model):
     def __str__(self):
         return self.link[0:10]
 
-class BookReviewManager(BaseManager):
+class BookReviewManager(Manager):
     def get_queryset(self):
         return super().get_queryset()
     
@@ -77,7 +83,7 @@ class BookReview(CommonModel):
     parent = models.ForeignKey("self", null=True, blank=True, on_delete=models.CASCADE, related_name="replies")
     comment = models.TextField(null=True, blank=True)
     reviewer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="book_reviews")
-    stars = models.PositiveSmallIntegerField(default=1, validators=[MinValueValidator(0), MaxValueValidator(5)])
+    rating = models.DecimalField(max_digits=3, decimal_places=2, default=1, validators=[MinValueValidator(0), MaxValueValidator(5)])
     likes = models.PositiveIntegerField(default=0)
     dis_likes = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -89,4 +95,5 @@ class BookReview(CommonModel):
         return f"{self.reviewer.username}'s review on {self.book.title}"
 
 
-
+post_save.connect(increase_book_review, sender=BookReview)
+post_delete.connect(decrease_book_review, sender=BookReview)

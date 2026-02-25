@@ -3,9 +3,10 @@
     .book-container {
         min-height: calc(100vh - 70px - 5rem);
         width: 90%;
+        margin: auto;
         margin-top: 2rem;
 
-        .book-item {
+        .book-item-basic {
             display: flex;
             justify-content: center;
             gap: 2rem;
@@ -32,30 +33,48 @@
                 }
             }
 
-            .book-info {
-                .basic-info{
+            .basic-info {
+                h1 {
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    margin-bottom: 1.5rem;
+                }
 
-                    h1 {
-                        font-size: 1.2rem;
-                        font-weight: bold;
-                        margin-bottom: 1.5rem;
-                    }
+                .basic-info-body {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.7rem;
 
-                    .basic-info-body{
-
+                    .book-rating {
                         display: flex;
-                        flex-direction: column;
-                        gap: 0.7rem;
+                        align-items: center;
+                        gap: 1rem;
+                        margin-bottom: 1rem;
+                    }
+                }
 
-                        .book-rating{
-                            display: flex;
-                            align-items: center;
-                            gap: 1rem;
-                            margin-bottom: 1rem;
-                        }
+                .cart-container{
+                    display: flex;
+                    align-items: center;
+                    margin: 1rem 0;
+                    gap: 0.5rem;
+                    font-weight: bold;
+                    color: v.$primaryColor;
+                    cursor: pointer;
+
+                    &:hover{
+                        opacity: 0.7;
                     }
                 }
             }
+        }
+
+        .book-details-box {
+            margin: 1rem auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            width: 70%;
         }
     }
 }

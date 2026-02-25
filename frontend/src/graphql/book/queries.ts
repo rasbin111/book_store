@@ -55,6 +55,10 @@ export const BOOKSBYID = gql`
       id
       title
       price
+      description
+      numOfRatings
+      numOfPages
+      averageRating
       primaryImage{
           id
           imageFile
