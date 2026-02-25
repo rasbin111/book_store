@@ -1,14 +1,16 @@
 @use "@styles/variables" as v;
 
 .category-home{
-    margin-top: 3.2rem;
+    // margin-top: 3.2rem;
     width: 100%;
     max-width: 250px;
-    height: calc(100vh - 70px - 5.2rem);
+    position: sticky;
+    top: 70px;
+    height: calc(100vh - 70px);
+    background-color: whitesmoke;
     border-radius: 0 5px 0 0;
-    border: 1px solid gray;
-    box-shadow: 1px 1px 4px 2px gray;
-    border-left: none;
+    // border-right: 1px solid gray;
+    // border-left: none;
     h2{
         text-align: center;
         width: 100%;

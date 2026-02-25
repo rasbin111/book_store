@@ -5,6 +5,9 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthProvider/AuthContext";
 import { Button, Input } from "@mantine/core";
 
+import { IoLogoFacebook, IoLogoInstagram, IoLogoTwitter } from "react-icons/io";
+import { AiFillTikTok } from "react-icons/ai";
+
 const Layout = () => {
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
@@ -49,6 +52,27 @@ const Layout = () => {
       </div>
       <div className="outlet-main">
         <Outlet />
+      </div>
+      <div className="footer-main">
+        <div className="footer-bottom">
+          <div className="copyright">
+            &copy; 2026 Book Store. All rights reserved.
+          </div>
+          <div className="social-media">
+            <a href="https://facebook.com" target="blank">
+              <IoLogoFacebook className="sm-icon" />
+            </a>
+            <a href="" target="blank">
+              <IoLogoTwitter className="sm-icon" />
+            </a>
+            <a href="" target="blank">
+              <IoLogoInstagram className="sm-icon" />
+            </a>
+            <a href="" target="blank">
+              <AiFillTikTok className="sm-icon" />
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );

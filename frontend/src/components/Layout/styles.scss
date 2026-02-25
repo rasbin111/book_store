@@ -34,3 +34,31 @@
         }
     }
 }
+
+.footer-main{
+    padding: 0.7rem;
+    // min-height: 140px;
+    width: 100%;
+    background-color: v.$primaryColor;
+    filter: contrast(120%);
+    color: white;
+
+    .footer-bottom{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .social-media{
+            display: flex;
+            gap: 0.3rem;
+            a{
+                color: white;
+                .sm-icon{
+                    cursor: pointer;
+                    &:hover{
+                        opacity: 0.7;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -51,6 +51,22 @@
             border: 1px solid v.$primaryColor;
             border-radius: 5px;
             width: 250px;
+
+            .book-edit-box{
+                position: relative;
+                
+                .book-edit-icon{
+                    position: absolute;
+                    right: 5px;
+                    z-index: 1;
+                    top: 5px;
+                    cursor: pointer;
+
+                    &:hover{
+                        opacity: 0.7;
+                    }
+                }
+            }
             .book-img {
                 display: flex;
                 padding: 1rem;

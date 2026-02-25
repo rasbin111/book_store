@@ -5,7 +5,7 @@ import CategoryHome from "./Components/Categories";
 import "./styles.scss";
 
 const HomePage = () => {
-  const { isEditor, isAdmin } = useAuth();
+
   const [category, setCategory] = useState("");
 
   return (
@@ -14,7 +14,6 @@ const HomePage = () => {
         <CategoryHome setCategory={setCategory}/>
         <BooksHome category={category}/>
       </div>
-      {(isEditor || isAdmin) && <div> Edit options </div>}
     </div>
   );
 };

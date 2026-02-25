@@ -9,10 +9,14 @@ import CustomPagination from "../../../../components/Pagination";
 import { useDisclosure } from "@mantine/hooks";
 import { Drawer, ScrollArea, Select } from "@mantine/core";
 import FilterBooks from "./filterBooks";
+import { SlOptionsVertical } from "react-icons/sl";
+import useAuth from "../../../../hooks/useAuth";
+
 
 const MEDIA_URL = "http://localhost:8000/media/";
 
 const BooksHome = ({category}: {category: string}) => {
+  const { isEditor, isAdmin } = useAuth();
   const [opened, { open, close }] = useDisclosure(false);
   const [sortValue, setSortValue] = useState("");
   const [pageSize, setPageSize] = useState(10);
@@ -79,6 +83,12 @@ const BooksHome = ({category}: {category: string}) => {
 
               return (
                 <li className="book-item">
+                  {
+                    isEditor && 
+                    <div className="book-edit-box">
+                    <SlOptionsVertical className="book-edit-icon"/>
+                  </div>
+                  }
                   <div className="book-img">
                     <img
                       src={
@@ -90,6 +100,7 @@ const BooksHome = ({category}: {category: string}) => {
                     />
                   </div>
                   <div className="book-info">
+
                     <a href="">{book.title}</a>
                     <p className="book-price"> NRs. {book.price} </p>
                     <ul>
