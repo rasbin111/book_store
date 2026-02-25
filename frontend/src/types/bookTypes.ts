@@ -32,3 +32,7 @@ interface BookEdges{
 export interface BooksData{
     books: BookEdges;
 }
+
+export interface BookData{
+    bookById: Book;
+}

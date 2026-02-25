@@ -44,7 +44,7 @@
         display: flex;
         gap: 1rem;
         flex-wrap: wrap;
-        .book-item {
+        .book-home-item {
             list-style: none;
             display: flex;
             flex-direction: column;
@@ -67,7 +67,7 @@
                     }
                 }
             }
-            .book-img {
+            .book-primary-img {
                 display: flex;
                 padding: 1rem;
                 align-items: center;
@@ -76,7 +76,7 @@
                     height: 100px;
                 }
             }
-            .book-info {
+            .book-home-info {
                 border-top: 1px solid v.$primaryColor;
                 padding-top: 1rem;
                 padding: 1rem;

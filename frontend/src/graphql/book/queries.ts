@@ -48,3 +48,25 @@ query bookList($offset: Int!, $first: Int!, $categorySlug: String, $orderBy: Str
   }
 }
 `
+
+export const BOOKSBYID = gql`
+  query bookById($id:ID!){
+    bookById(id: $id){
+      id
+      title
+      price
+      primaryImage{
+          id
+          imageFile
+      }
+      images{
+        id
+        imageFile
+      }
+      authors{
+        id
+        name
+      }
+    }
+  }
+`

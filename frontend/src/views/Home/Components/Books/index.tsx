@@ -11,6 +11,7 @@ import { Drawer, ScrollArea, Select } from "@mantine/core";
 import FilterBooks from "./filterBooks";
 import { SlOptionsVertical } from "react-icons/sl";
 import useAuth from "../../../../hooks/useAuth";
+import { Link } from "react-router";
 
 
 const MEDIA_URL = "http://localhost:8000/media/";
@@ -82,14 +83,14 @@ const BooksHome = ({category}: {category: string}) => {
               const book = item.node;
 
               return (
-                <li className="book-item">
+                <li className="book-home-item">
                   {
                     isEditor && 
                     <div className="book-edit-box">
                     <SlOptionsVertical className="book-edit-icon"/>
                   </div>
                   }
-                  <div className="book-img">
+                  <div className="book-primary-img">
                     <img
                       src={
                         book.primaryImage?.imageFile
@@ -99,9 +100,9 @@ const BooksHome = ({category}: {category: string}) => {
                       alt={book.title}
                     />
                   </div>
-                  <div className="book-info">
+                  <div className="book-home-info">
 
-                    <a href="">{book.title}</a>
+                    <Link to={`/books/${book.id}`}>{book.title}</Link>
                     <p className="book-price"> NRs. {book.price} </p>
                     <ul>
                       {book.authors.length > 1 ? `Authors` : `Author:`}

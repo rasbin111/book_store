@@ -1,0 +1,61 @@
+@use "@styles/variables" as v;
+.book-main {
+    .book-container {
+        min-height: calc(100vh - 70px - 5rem);
+        width: 90%;
+        margin-top: 2rem;
+
+        .book-item {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+
+            @media (max-width: 768px) {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            .book-images {
+                width: 50%;
+                @media (max-width: 768px) {
+                    width: 80%;
+                }
+                .mantine-Carousel-slide {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .carousel-book-img {
+                    max-height: 250px;
+                    max-width: 100%;
+                    object-fit: contain;
+                }
+            }
+
+            .book-info {
+                .basic-info{
+
+                    h1 {
+                        font-size: 1.2rem;
+                        font-weight: bold;
+                        margin-bottom: 1.5rem;
+                    }
+
+                    .basic-info-body{
+
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.7rem;
+
+                        .book-rating{
+                            display: flex;
+                            align-items: center;
+                            gap: 1rem;
+                            margin-bottom: 1rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
