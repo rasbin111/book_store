@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useAuth } from "../../hooks/useAuth";
 import BooksHome from "./Components/Books";
 import CategoryHome from "./Components/Categories";
 import "./styles.scss";
