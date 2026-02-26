@@ -56,7 +56,7 @@ const LoginPage = () => {
   }
 
 
-  if (loading) return <p> Loading... </p>
+  // if (loading) return <p> Loading... </p>
 
 
   return (
@@ -80,7 +80,7 @@ const LoginPage = () => {
         key={form.key("password")}
         {...form.getInputProps("password")}
         />
-        <Button type="submit"> Login </Button>
+        <Button type="submit" color="#7c2d38" loading={loading}> Login </Button>
       </form>
     </div>
   )
