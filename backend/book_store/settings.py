@@ -174,10 +174,13 @@ LOGGING = {
     },
     "handlers": {
         "file": {
-            "class": "logging.FileHandler",
+            "level": "WARNING",
+            "class": "logging.TimedRotatingFileHandler",
             "filename": log_file_path,
             "formatter": "simple",
-            "level": "WARNING",
+            "when": "midnight",
+            "interval": 1,
+            "backupCount": 3,
         }
     },
     "loggers": {
@@ -215,3 +218,4 @@ AXES_LOCKOUT_PARAMETERS = ["ip_address"]
 # AXES_LOCKOUT_CALLABLE = "agentsic.utils.lockout"
 # AXES_USERNAME_CALLABLE = "agentsic.utils.get_username"
 
+GEOIP_PATH = os.path.join("geoip")
