@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'graphene_django',
     'corsheaders',
     'django_filters',
+    'axes',
 
     'apps.useraccount',
     'apps.core',
@@ -62,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'axes.middleware.AxesMiddleware',
 ]
 
 ROOT_URLCONF = 'book_store.urls'
@@ -153,8 +155,39 @@ GRAPHENE = {
 
 AUTHENTICATION_BACKENDS = [
     "graphql_jwt.backends.JSONWebTokenBackend",
+    "axes.backends.AxesStandaloneBackend",
     "django.contrib.auth.backends.ModelBackend",
 ]
+
+logger_dir_path = os.path.join(os.getcwd(), "logs")
+os.makedirs(logger_dir_path, exist_ok=True)
+log_file_path = os.path.join(logger_dir_path, "book_store.log")
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "simple": {
+            "format": "{asctime}:{name} {module}.py {levelname}: - {message}",
+            "style": "{",
+        }
+    },
+    "handlers": {
+        "file": {
+            "class": "logging.FileHandler",
+            "filename": log_file_path,
+            "formatter": "simple",
+            "level": "WARNING",
+        }
+    },
+    "loggers": {
+        "": {
+            "level": "WARNING",
+            "handlers": ["file"],
+        }
+    }
+
+}
 
 
 
@@ -172,3 +205,13 @@ GRAPHQL_JWT = {
     "JWT_REFRESH_EXPIRATION_DELTA": timedelta(days=7),
     # "JWT_AUTH_HEADER_PREFIX": "Bearer",
 }
+
+
+AXES_FAILURE_LIMIT = 5
+AXES_ONLY_USER_FAILURES = True
+AXES_COOLOFF_TIME = 0.5  # 0.5=30 minutes
+AXES_RESET_ON_SUCCESS = True
+AXES_LOCKOUT_PARAMETERS = ["ip_address"]
+# AXES_LOCKOUT_CALLABLE = "agentsic.utils.lockout"
+# AXES_USERNAME_CALLABLE = "agentsic.utils.get_username"
+
