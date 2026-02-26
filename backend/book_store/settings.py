@@ -162,6 +162,7 @@ AUTHENTICATION_BACKENDS = [
 logger_dir_path = os.path.join(os.getcwd(), "logs")
 os.makedirs(logger_dir_path, exist_ok=True)
 log_file_path = os.path.join(logger_dir_path, "book_store.log")
+celery_log_file_path = os.path.join(logger_dir_path, "celery_tasks.log")
 
 LOGGING = {
     "version": 1,
@@ -170,21 +171,44 @@ LOGGING = {
         "simple": {
             "format": "{asctime}:{name} {module}.py {levelname}: - {message}",
             "style": "{",
-        }
+        },
+        "timestamp": {
+                "format": "{levelname} {asctime} {module}.py: - {message}",
+                "style": "{",
+        },
     },
     "handlers": {
         "file": {
-            "class": "logging.FileHandler",
+            "level": "WARNING",
+            "class": "logging.handlers.TimedRotatingFileHandler",
             "filename": log_file_path,
             "formatter": "simple",
-            "level": "WARNING",
+            "when": "midnight",
+            "interval": 1,
+            "backupCount": 3,
+        },
+        "celery_handler": {
+            "level": "INFO",
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "filename": celery_log_file_path,
+            "formatter": "timestamp",
+            "when": "midnight",
+            "interval": 1,
+            "backupCount": 30, # Keep a week of task history
         }
     },
     "loggers": {
+        # Catch-all for the whole app
         "": {
             "level": "WARNING",
             "handlers": ["file"],
-        }
+        },
+        # Specific logger for your tasks
+        "apps.useraccount.tasks": {
+            "handlers": ["celery_handler"],
+            "level": "INFO",
+            "propagate": False, # Important: prevents logs from also going to the main file
+        },
     }
 
 }
@@ -215,3 +239,8 @@ AXES_LOCKOUT_PARAMETERS = ["ip_address"]
 # AXES_LOCKOUT_CALLABLE = "agentsic.utils.lockout"
 # AXES_USERNAME_CALLABLE = "agentsic.utils.get_username"
 
+GEOIP_PATH = os.path.join("geoip")
+
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://redis:6379")
+CELERY_TIMEZONE = "Asia/Kathmandu"
+CELERY_TASK_TIME_LIMIT = 30 * 60 # 30 min

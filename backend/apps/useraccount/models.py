@@ -85,15 +85,30 @@ class CustomUser(AbstractUser):
 
 class UserLoginTrack(models.Model):
     user = models.ForeignKey(CustomUser, related_name="login_track", on_delete=models.CASCADE)
-    user_agent = models.CharField(max_length=255)
-    ip_address = models.GenericIPAddressField()
+    user_agent = models.CharField(max_length=700, null=True, blank=True)
+    ip_address = models.GenericIPAddressField(null=True, blank=True)
     browser_name = models.CharField(max_length=255, null=True, blank=True)
     browser_version = models.CharField(max_length=255, blank=True, null=True)
     platform = models.CharField(max_length=255, blank=True, null=True)
     device = models.CharField(max_length=255, blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    is_active = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    is_active = models.BooleanField(default=False, null=True)
     last_login = models.DateTimeField(auto_now=True, null=True)
+    city = models.CharField(max_length=100, null=True, blank=True)
+    country = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return f"{self.user.username}'s track: {self.ip_address}"
+    
+    def save(self, *args, **kwargs):
+        user = self.user 
+        active_sessions = self.__class__.objects.filter(
+            user=user,
+            is_active=True
+        ).order_by("-created_at")
+
+        if active_sessions.count() >= 5:
+            oldest_session = active_sessions.last()
+            oldest_session.is_active = False
+
+        return super().save(*args, **kwargs)

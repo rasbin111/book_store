@@ -13,4 +13,15 @@ DB_USER=dev_user
 DB_PASSWORD=adminadminadmin
 DB_HOST=localhost
 DB_PORT=5432
+
+CELERY_BROKER="redis://localhost:6379/0"
+```
+
+## Running the app (Things to do)
+
+1. Make sure celery is up and running
+Be sure that redis is running on your system
+
+```bash
+celery -A book_store worker -l info & celery -A book_store beat -l info
 ```

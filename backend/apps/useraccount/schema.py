@@ -1,10 +1,12 @@
 import graphene
 from graphql import GraphQLError
-
 from graphene_django import DjangoObjectType
 import graphql_jwt
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
+
+from .tasks import track_user_login
+from utils.ip import get_client_ip
 
 User = get_user_model()
 
@@ -28,11 +30,23 @@ class UserAccountQuery(graphene.ObjectType):
         users = User.objects.all()
         return users
 
+
 class ObtainJSONWebToken(graphql_jwt.JSONWebTokenMutation):
     user = graphene.Field(UserType)
 
     @classmethod
     def resolve(cls, root, info, **kwargs):
+        user = info.context.user
+        
+        if user.is_authenticated:
+            ip = get_client_ip(info)
+            ua_string = info.context.META.get('HTTP_USER_AGENT', '')
+            track_user_login.delay(
+                user=user.id, 
+                ua_string=ua_string,
+                ip_address=ip,
+                )
+
         return cls(user=info.context.user)
 
 
