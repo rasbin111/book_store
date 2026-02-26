@@ -81,3 +81,19 @@ class CustomUser(AbstractUser):
             self.username = get_unique_username(self, self.first_name + " " + self.last_name, "username")
 
         return super().save(*args, **kwargs)
+    
+
+class UserLoginTrack(models.Model):
+    user = models.ForeignKey(CustomUser, related_name="login_track", on_delete=models.CASCADE)
+    user_agent = models.CharField(max_length=255)
+    ip_address = models.GenericIPAddressField()
+    browser_name = models.CharField(max_length=255, null=True, blank=True)
+    browser_version = models.CharField(max_length=255, blank=True, null=True)
+    platform = models.CharField(max_length=255, blank=True, null=True)
+    device = models.CharField(max_length=255, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=False)
+    last_login = models.DateTimeField(auto_now=True, null=True)
+
+    def __str__(self):
+        return f"{self.user.username}'s track: {self.ip_address}"

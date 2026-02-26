@@ -38,7 +38,8 @@ const LoginPage = () => {
       }
 
       
-    }
+    },
+    onError: () => {}
   })
 
     const handleLogin = (values: {email: string, password: string}) =>{
@@ -57,11 +58,15 @@ const LoginPage = () => {
 
   if (loading) return <p> Loading... </p>
 
-  if (error) return <p> Error: {error.message} </p>
 
   return (
     <div>
       <h1> Login </h1>
+      {error && (
+        <div style={{ color: 'red', marginBottom: '10px', fontWeight: 'bold' }}>
+          {error.message}
+        </div>
+      )}
       <form onSubmit={form.onSubmit(handleLogin)}>
         <TextInput 
         label="Email"

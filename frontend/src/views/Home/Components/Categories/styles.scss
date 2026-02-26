@@ -1,6 +1,6 @@
 @use "@styles/variables" as v;
 
-.category-home{
+.category-home {
     width: 100%;
     max-width: 250px;
     position: sticky;
@@ -9,7 +9,7 @@
     background-color: whitesmoke;
     border-left: none;
     border-top: none;
-    h2{
+    h2 {
         text-align: center;
         margin-top: 2rem;
         font-size: 1.2rem;
@@ -18,7 +18,7 @@
         padding: 0.5rem 0;
         border-bottom: 2px solid v.$primaryColor;
     }
-    .category-list{
+    .category-list {
         padding: 0 2rem;
         display: flex;
         flex-direction: column;
@@ -26,16 +26,16 @@
         // justify-content: flex-start;
         gap: 1rem;
         flex-wrap: wrap;
-        li{
+        li {
             list-style: none;
-            button{
+            button {
                 color: v.$primaryColor;
                 font-weight: bold;
                 font-size: 1rem;
                 text-transform: capitalize;
                 text-decoration: none;
 
-                &:hover{
+                &:hover {
                     opacity: 0.7;
                 }
             }
