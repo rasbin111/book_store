@@ -12,6 +12,9 @@ import { AuthProvider } from "./context/AuthProvider/AuthProvider";
 import Layout from "./components/Layout";
 import BookPage from "./views/Book";
 import PageNotFound from "./views/404NotFound";
+import UserLayout from "./components/UserLayout";
+import ProfilePage from "./views/User/Profile";
+import SettingsPage from "./views/User/Settings";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +33,19 @@ const router = createBrowserRouter([
         Component: BookPage,
       },
     ],
+  },
+  {
+    Component: UserLayout,
+    children: [
+      {
+        path: "/profile",
+        Component: ProfilePage
+      },
+      {
+        path: "/settings",
+        Component: SettingsPage
+      }
+    ]
   },
   {
     path: "/login",

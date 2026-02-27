@@ -8,11 +8,12 @@ import { UnstyledButton } from "@mantine/core";
 
 const CategoryHome = ({
   setCategory,
+  category,
 }: {
   setCategory: (category: string) => void;
+  category: string;
 }) => {
   const { loading, error, data } = useQuery<CategoriesData>(CATEGORIES);
-
   if (loading) return <CustomLoadinOverlay />;
   if (error) console.log(error);
   return (
@@ -21,17 +22,18 @@ const CategoryHome = ({
         <h2> Categories </h2>
         <ul className="category-list">
           <li>
-            <UnstyledButton onClick={() => setCategory("")}>
-              {" "}
-              All{" "}
-            </UnstyledButton>
+            <UnstyledButton onClick={() => setCategory("")}
+            className={category == ""? "active-cat": ""}
+              >All</UnstyledButton>
           </li>
           {data &&
             data.categories.length > 0 &&
             data.categories.map((item) => {
               return (
                 <li>
-                  <UnstyledButton onClick={() => setCategory(item.name)}>
+                  <UnstyledButton 
+                  onClick={() => setCategory(item.name)} 
+                  className={item.name == category?"active-cat": ""}>
                     {item.name}
                   </UnstyledButton>
                 </li>

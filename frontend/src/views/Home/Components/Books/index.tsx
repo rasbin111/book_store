@@ -95,10 +95,11 @@ const BooksHome = ({category}: {category: string}) => {
                       src={
                         book.primaryImage?.imageFile
                           ? `${MEDIA_URL}${book.primaryImage.imageFile}`
-                          : "/books.png"
+                          : "/logo2.png"
                       }
                       alt={book.title}
                     />
+
                   </div>
                   <div className="book-home-info">
 

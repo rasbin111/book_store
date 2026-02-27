@@ -10,7 +10,7 @@ const HomePage = () => {
   return (
     <div className="home-main">
       <div className="main-content">
-        <CategoryHome setCategory={setCategory}/>
+        <CategoryHome setCategory={setCategory} category={category}/>
         <BooksHome category={category}/>
       </div>
     </div>
