@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'apps.core',
     'apps.author',
     'apps.book',
+    'apps.vendor',
+    'apps.sale',
     
 ]
 

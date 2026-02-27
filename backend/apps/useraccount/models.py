@@ -6,6 +6,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 from utils.validators import PHONE_REGEX
 from utils.user import get_unique_username, user_avatar_directory_path
+from utils.constants import USER_ROLES_CHOICES, GENDER_CHOICES
+
 
 class UserManager(BaseUserManager):
     use_in_migration = True
@@ -33,22 +35,12 @@ class UserManager(BaseUserManager):
 
 
 class CustomUser(AbstractUser):
-    USER_ROLES_CHOICES = (
-        ('superuser', 'superuser'),
-        ('admin', 'admin'),
-        ('editor', 'editor'),
-        ('viewer', 'viewer'),
-        ('delivery', 'delivery_person')
-    )
-    GENDER_CHOICES = ((0, "Male"), (1, "Female"), (2, "Other"))
-
     username = models.CharField(max_length=100, unique=True)
     first_name = models.CharField(max_length=100, null=True, blank=True)
     middle_name = models.CharField(max_length=100, null=True, blank=True)
     last_name = models.CharField(max_length=100, null=True, blank=True)
     email = models.EmailField(max_length=100, unique=True)
     role = models.CharField(max_length=10, default="viewer", choices=USER_ROLES_CHOICES)
-    date_joined = models.DateTimeField(auto_now_add=True, null=True)
     gender = models.PositiveSmallIntegerField(choices=GENDER_CHOICES, null=True, default=0)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
@@ -97,6 +89,8 @@ class DeliveryPerson(models.Model):
 
     def __str__(self):
         return self.full_name
+
+
 
 class UserAddress(models.Model):
     ADRESS_TYPE_CHOICES = (

@@ -1,34 +1,13 @@
 import graphene
-from graphql import GraphQLError
-from graphene_django import DjangoObjectType
 import graphql_jwt
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 
-from .tasks import track_user_login
+from .types import UserType, UserRoleEnum, GenderEnum
+from apps.useraccount.tasks import track_user_login
 from utils.ip import get_client_ip
 
 User = get_user_model()
-
-class UserRoleEnum(graphene.Enum):
-    SUPER_USER = "superuser"
-    ADMIN = "admin"
-    EDITOR = "editor"
-    VIEWER = "viewer"
-
-class UserType(DjangoObjectType):
-    class Meta:
-        model = User
-        exclude = ("password", )
-
-
-class UserAccountQuery(graphene.ObjectType):
-    all_users = graphene.List(UserType)
-
-    @staticmethod
-    def resolve_all_users(root, info):
-        users = User.objects.all()
-        return users
 
 
 class ObtainJSONWebToken(graphql_jwt.JSONWebTokenMutation):
@@ -58,6 +37,7 @@ class CreateUser(graphene.Mutation):
         last_name = graphene.String()
         email = graphene.String(required=True)
         password = graphene.String(required=True)
+        gender = graphene.Argument(GenderEnum)
         role = graphene.Argument(UserRoleEnum, required=True)
 
     user = graphene.Field(UserType)
@@ -65,14 +45,15 @@ class CreateUser(graphene.Mutation):
     error = graphene.String()
 
     @staticmethod
-    def mutate(root, info, email, first_name, last_name, password, username, role):
+    def mutate(root, info, email, first_name, last_name, password, username, gender, role):
         try:
             user = User.objects.create(
                 email=email,
                 first_name=first_name,
                 last_name=last_name,
                 username=username,
-                role=role.value
+                role=role.value,
+                gender=gender.value,
             )
             user.set_password(password)
 
