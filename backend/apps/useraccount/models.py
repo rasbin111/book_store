@@ -67,8 +67,10 @@ class CustomUser(AbstractUser):
 
     def save(self, *args, **kwargs):
         self.email = self.email.lower()
-        self.first_name = self.first_name.capitalize()
-        self.last_name = self.last_name.capitalize()
+        if self.first_name:
+            self.first_name = self.first_name.capitalize()
+        if self.last_name:
+            self.last_name = self.last_name.capitalize()
 
         if not self.username:
             self.username = get_unique_username(self, self.first_name + " " + self.last_name, "username")
