@@ -2,6 +2,8 @@ import graphene
 from graphene_django import DjangoObjectType
 from django.contrib.auth import get_user_model
 
+from apps.useraccount.models import UserOrder
+
 User = get_user_model()
 
 
@@ -23,3 +25,17 @@ class UserType(DjangoObjectType):
         model = User
         exclude = ("password", )
         interfaces = (graphene.relay.Node, )
+
+class UserOrderType(DjangoObjectType):
+
+    class Meta:
+        model = UserOrder
+        fields = [
+            "order_id",
+            "address",
+            "payment_status",
+            "order_amount",
+            "tax",
+            
+
+        ]

@@ -95,5 +95,13 @@ class BookReview(CommonModel):
         return f"{self.reviewer.username}'s review on {self.book.title}"
 
 
+class BookSale(CommonModel):
+    book = models.ForeignKey(Book, on_delete=models.DO_NOTHING)
+    quantity = models.PositiveIntegerField(default=1, null=True)
+    order = models.ForeignKey("useraccount.UserOrder", on_delete=models.CASCADE, related_name="books_sale")
+
+    def __str__(self):
+        return f"{self.book.title}'s sale: {self.quantity}"
+
 post_save.connect(increase_book_review, sender=BookReview)
 post_delete.connect(decrease_book_review, sender=BookReview)
