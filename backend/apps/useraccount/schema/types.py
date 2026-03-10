@@ -26,6 +26,7 @@ class UserType(DjangoObjectType):
         exclude = ("password", )
         interfaces = (graphene.relay.Node, )
 
+
 class UserOrderType(DjangoObjectType):
 
     class Meta:
@@ -36,6 +37,9 @@ class UserOrderType(DjangoObjectType):
             "payment_status",
             "order_amount",
             "tax",
-            
+            "delivery_charge",
+            "total_amount",
+            "paid_amount",
+            "delivery_person",
 
         ]
