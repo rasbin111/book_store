@@ -1,7 +1,6 @@
 from django.utils.text import slugify
 from datetime import datetime
 
-
 def get_unique_username(model_instance, full_name, slug_field_name):
     """
     Takes a model instance, sluggable field name (such as 'title') of that
@@ -24,3 +23,4 @@ def get_unique_username(model_instance, full_name, slug_field_name):
 def user_avatar_directory_path(instance, filename):  # pylint: disable = unused-argument
     """Upload path to save file"""
     return f"user_account/{datetime.now().strftime('%Y_%m_%d_%H_%M_%S')}_{filename}"
+

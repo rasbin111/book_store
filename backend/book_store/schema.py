@@ -1,11 +1,11 @@
 import graphene
 
-from apps.useraccount.schema import UserAccountQuery, UserAccountMutation, UserOrderQuery
+from apps.useraccount.schema import UserAccountQuery, UserAccountMutation
 from apps.author.schema import AuthorQuery, AuthorMutation
 from apps.book.schema import BookQuery, CategoryQuery, BookMutation
+from apps.order.schema import UserOrderQuery
 
-
-class Query(AuthorQuery, BookQuery, CategoryQuery, UserAccountQuery, UserOrderQuery, graphene.ObjectType):
+class Query(AuthorQuery, BookQuery, CategoryQuery, UserOrderQuery, UserAccountQuery, graphene.ObjectType):
     pass
 
 

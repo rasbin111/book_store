@@ -1,0 +1,13 @@
+@use "@styles/variables" as v;
+
+.user-settings-main{
+    min-height: calc(100vh - 69px - 3rem);
+    padding: 1rem 2rem;
+    h1{
+        font-size: 1.2rem;
+        padding-bottom: 0.3rem;
+        color: v.$textColor;
+        width: fit-content;
+        border-bottom: 1px solid v.$textColor;
+    }
+}

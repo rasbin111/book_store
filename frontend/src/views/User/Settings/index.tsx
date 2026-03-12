@@ -2,7 +2,9 @@ import "./styles.scss"
 
 const SettingsPage = () => {
   return (
-    <div>SettingsPage</div>
+    <div className="user-settings-main">
+      <h1> Settings </h1>
+    </div>
   )
 }
 

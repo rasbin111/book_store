@@ -14,6 +14,7 @@ export const useAuth = () => {
   if (user) {
     return {
       isLoggedIn: true,
+      userId: user.id,
       isAdmin: user?.role === "ADMIN",
       isEditor: user?.role === "EDITOR",
       isViewer: user?.role === "VIEWER",
@@ -24,6 +25,7 @@ export const useAuth = () => {
     isLoggedIn: false,
     isAdmin: false,
     isEditor: false,
+    userId: null,
     isViewer: false,
   };
 };

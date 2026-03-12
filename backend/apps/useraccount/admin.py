@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from .models import CustomUser, UserLoginTrack, DeliveryPerson, UserAddress, UserOrder
+from .models import CustomUser, UserLoginTrack
 
 admin.site.register(CustomUser)
 admin.site.register(UserLoginTrack)
-admin.site.register([DeliveryPerson, UserAddress, UserOrder])

@@ -1,0 +1,33 @@
+@use "@styles/variables" as v;
+
+.user-profile-content {
+    min-height: calc(100vh - 69px - 3rem);
+    padding: 1rem 2rem;
+    h2 {
+        font-size: 1rem;
+        font-size: 1.2rem;
+        color: v.$textColor;
+        width: fit-content;
+        margin-bottom: 1rem;
+    }
+    .user-profile-main {
+        .basic-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            color: v.$textColor;
+
+            .bi-value {
+                opacity: 0.79;
+            }
+
+            .capitalize {
+                text-transform: lowercase;
+            }
+        }
+
+        .orders-container {
+            margin-top: 1rem;
+        }
+    }
+}

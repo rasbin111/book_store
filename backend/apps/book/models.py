@@ -98,7 +98,7 @@ class BookReview(CommonModel):
 class BookSale(CommonModel):
     book = models.ForeignKey(Book, on_delete=models.DO_NOTHING)
     quantity = models.PositiveIntegerField(default=1, null=True)
-    order = models.ForeignKey("useraccount.UserOrder", on_delete=models.CASCADE, related_name="books_sale")
+    order = models.ForeignKey("order.UserOrder", on_delete=models.CASCADE, related_name="books_sale")
 
     def __str__(self):
         return f"{self.book.title}'s sale: {self.quantity}"

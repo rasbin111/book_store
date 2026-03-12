@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'apps.author',
     'apps.book',
     'apps.vendor',
-    'apps.sale',
+    'apps.order',
     
 ]
 
