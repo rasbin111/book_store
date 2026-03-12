@@ -1,0 +1,11 @@
+name: Github Actions
+run-name: ${{github.actor}} is testing out Github Actions
+on: [push]
+
+jobs:
+  Explore-Github-Actions:
+    runs-on: ubuntu-latest
+    steps: 
+      - run: echo "This job was automatically trigerred by ${{github.event_name}} event"
+      - run: echo "Running on ${{runner.os}} server"
+      - run: echo "Branch is ${{github.ref}}"
