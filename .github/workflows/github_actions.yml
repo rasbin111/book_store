@@ -29,4 +29,5 @@ jobs:
           USE_SQLITE: "True"
         run: |
           python manage.py test
+        working-directory: ./backend
    
