@@ -9,7 +9,11 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    services:
+      redis:
+        image: redis:7
+        ports:
+          - 6379:6379
     steps:
       - uses: actions/checkout@v5
 
@@ -28,6 +32,7 @@ jobs:
         env:
           USE_SQLITE: "True"
         run: |
+          celery -A book_store worker -l info & celery -A book_store beat -l info
           python manage.py test
         working-directory: ./backend
    
