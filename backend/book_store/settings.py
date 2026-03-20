@@ -88,11 +88,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'book_store.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-use_sqlite = os.getenv("USE_SQLITE", False)
+USE_SQLITE = os.environ.get("USE_SQLITE", "False") == "True"
 
-if use_sqlite:
+if USE_SQLITE:
     DATABASES = {
         "default": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "dq.sqlite3"
