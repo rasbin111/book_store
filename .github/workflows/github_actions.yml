@@ -31,7 +31,7 @@ jobs:
       - name: Run Tests
         env:
           USE_SQLITE: "True"
-          CELERY_BROKER: "redis://redis:6379"
+          CELERY_BROKER: "redis://localhost:6379/0"
         run: |
           celery -A book_store worker -l info & celery -A book_store beat -l info
           python manage.py test
