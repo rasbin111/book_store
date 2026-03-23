@@ -17,7 +17,7 @@ import { Link } from "react-router";
 const MEDIA_URL = "http://localhost:8000/media/";
 
 const BooksHome = ({category}: {category: string}) => {
-  const { isEditor, isAdmin } = useAuth();
+  const { isEditor } = useAuth();
   const [opened, { open, close }] = useDisclosure(false);
   const [sortValue, setSortValue] = useState("");
   const [pageSize, setPageSize] = useState(10);
@@ -122,12 +122,15 @@ const BooksHome = ({category}: {category: string}) => {
             })}
         </ul>
         {data && (
-          <CustomPagination
-            totalCount={data.books.totalCount}
-            pageSize={pageSize}
-            activePage={page}
-            setPage={setPage}
-          />
+          <div>
+            <button onClick={()=>setPageSize(100)}> 100 per pages</button>
+            <CustomPagination
+              totalCount={data.books.totalCount}
+              pageSize={pageSize}
+              activePage={page}
+              setPage={setPage}
+            />
+          </div>
         )}
       </div>
     </div>

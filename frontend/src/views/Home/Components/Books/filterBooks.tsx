@@ -1,6 +1,6 @@
 import { useForm } from "@mantine/form";
 import "./styles.scss";
-import { Button, Flex, Group, Select, TextInput } from "@mantine/core";
+import { Button, Flex, Select, TextInput } from "@mantine/core";
 
 const FilterBooks = () => {
   const form = useForm({
