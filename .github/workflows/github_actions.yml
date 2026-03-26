@@ -35,7 +35,7 @@ jobs:
           CELERY_BROKER=redis://redis:6379/0
           EOF
       
-      - name: "Build and run container for backend"
+      - name: "Running pytest"
         run: |
           docker compose -f docker-compose-github.yml build
           docker compose -f docker-compose-github.yml up -d redis

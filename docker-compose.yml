@@ -44,6 +44,7 @@ services:
       - ./backend/.env
     depends_on:
       - redis
+      - backend
 
   frontend:
     build: ./frontend
