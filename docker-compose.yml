@@ -37,18 +37,17 @@ services:
   celery:
     build: ./backend
     container_name: celery_worker
-    command: celery -A JBBL worker -l info
+    command: celery -A book_store worker -l info & celery -A book_store beat -l info
     volumes:
       - ./backend:/backend
     env_file:
       - ./backend/.env
     depends_on:
       - redis
-      - backend
 
   frontend:
     build: ./frontend
-    command: sh -c "npm install --legacy-peer-deps && npm run build"
+    command: sh -c "npm install --legacy-peer-deps && npm run dev -- --host 0.0.0.0"
     volumes:
       - ./frontend:/frontend
     ports:

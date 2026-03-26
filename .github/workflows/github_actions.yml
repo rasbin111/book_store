@@ -9,31 +9,36 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    services:
-      redis:
-        image: redis:7
-        ports:
-          - 6379:6379
     steps:
       - uses: actions/checkout@v5
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Install Dependencies
+      - name: "create env file"
+        environment: book_store
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-        working-directory: ./backend
 
-      - name: Run Tests
-        env:
-          USE_SQLITE: "True"
-          CELERY_BROKER: "redis://localhost:6379/0"
+          echo "VITE_API_BASE_URL=http://localhost:8000" > frontend/.env         
+
+          cat <<EOF > backend/.env
+          EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+          EMAIL_HOST=smtp.gmail.com
+          EMAIL_PORT=587
+          EMAIL_HOST_USER=your-email@gmail.com
+          EMAIL_HOST_PASSWORD=your-16-char-app-password
+          DEFAULT_FROM_EMAIL=book_store@gmail.com
+
+          DB_NAME=${{ secrets.DB_NAME }}
+          DB_USER=${{ secrets.DB_USER }}
+          DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+          DB_HOST=postgres_db
+          DB_PORT=5432
+
+          CELERY_BROKER=redis://redis:6379/0
+          EOF
+      
+      - name: "Build and run container"
         run: |
-          celery -A book_store worker -l info & celery -A book_store beat -l info
-          python manage.py test
-        working-directory: ./backend
+          docker compose up --build
+
+
+
    
