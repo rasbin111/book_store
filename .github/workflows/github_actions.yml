@@ -37,8 +37,10 @@ jobs:
       
       - name: "Build and run container for backend"
         run: |
-          docker compose -f docker-compose-github.yml build  redis celery pytest
-          docker compose -f docker-compose-github.yml run redis celery pytest
+          docker compose -f docker-compose-github.yml build
+          docker compose -f docker-compose-github.yml up -d redis
+          docker compose -f docker-compose-github.yml up -d celery
+          docker compose -f docker-compose-github.yml run pytest
 
 
    

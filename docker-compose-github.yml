@@ -45,6 +45,7 @@ services:
       - ./backend/.env
     depends_on:
       - redis
+      - backend 
   
   pytest:
     build: ./backend
@@ -53,9 +54,9 @@ services:
     volumes:
       - ./backend:/backend
     depends_on:
-      - postgres_db
-      - redis 
       - celery
+      - backend
+
     env_file:
       - ./backend/.env
 
