@@ -54,9 +54,11 @@ services:
       - ./backend:/backend
     depends_on:
       - postgres_db
+      - redis 
+      - celery
     env_file:
       - ./backend/.env
-      
+
   frontend:
     build: ./frontend
     command: sh -c "npm install --legacy-peer-deps && npm run build"
