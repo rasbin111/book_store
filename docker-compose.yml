@@ -37,7 +37,7 @@ services:
   celery:
     build: ./backend
     container_name: celery_worker
-    command: celery -A book_store worker -l info & celery -A book_store beat -l info
+    command: sh -c "celery -A book_store worker -l info & celery -A book_store beat -l info"
     volumes:
       - ./backend:/backend
     env_file:
