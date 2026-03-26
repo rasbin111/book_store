@@ -19,10 +19,9 @@ class CreateBookMutation(graphene.Mutation):
     created = graphene.Boolean()
     error = graphene.String()
 
-
     @staticmethod
     @login_required
-    @permission_required(["book.create_book"])
+    @permission_required(["book.add_book"])
     def mutate(root, info, **kwargs):
         try:
             user = info.context.user
